@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Battle4GamesYT Web Games</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(180deg, #0f2027, #203a43, #2c5364);
+            color: white;
+        }
+
+        /* Top bar */
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 12px 20px;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(6px);
+        }
+
+        .btn {
+            padding: 12px 20px;
+            background: #1e1e1e;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 16px;
+            transition: transform 0.15s, background 0.15s;
+        }
+
+        .btn:hover {
+            background: #ff4757;
+            transform: translateY(-3px);
+        }
+
+        .social-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-btn {
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            transition: transform 0.15s, opacity 0.15s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .social-btn.discord { background: #5865F2; }
+        .social-btn.youtube { background: #FF0000; }
+
+        .social-btn:hover { transform: translateY(-2px); opacity: 0.85; }
+
+        /* Home content */
+        #homeContent {
+            padding-top: 140px;
+            text-align: center;
+        }
+
+        #homeContent h1 { font-size: 48px; margin: 0; }
+        #homeContent h2 { font-size: 24px; margin: 5px 0; opacity: 0.8; }
+        #homeContent h3 { font-size: 16px; margin: 5px 0 20px 0; opacity: 0.6; }
+
+        /* Game buttons group */
+        .game-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+
+        .game-card {
+            background: #1e1e1e;
+            border-radius: 12px;
+            width: 180px;
+            cursor: pointer;
+            transition: transform 0.15s, box-shadow 0.15s;
+            text-align: center;
+            padding: 25px 10px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+
+        /* Game fullscreen */
+        #gameContainer {
+            position: fixed;
+            inset: 0;
+            background: black;
+            display: none;
+            z-index: 999;
+        }
+
+        #gameFrame { width: 100%; height: 100%; border: none; }
+    </style>
+</head>
+<body>
+
+    <!-- Top bar -->
+    <div class="top-bar">
+        <button class="btn" onclick="goHome()">🏠 Home</button>
+        <div class="social-group">
+            <a class="social-btn discord" href="https://discord.gg/2dvWC4SZ" target="_blank">💬 Discord</a>
+            <a class="social-btn youtube" href="https://www.youtube.com/@Battle4GamesYT" target="_blank">▶ YouTube</a>
+        </div>
+    </div>
+
+    <!-- Home -->
+    <div id="homeContent">
+        <h1>🎮 Battle4GamesYT Web Games</h1>
+        <h2>Play Free Games Online</h2>
+        <h3>No downloads • Just click & play • Have fun!</h3>
+
+        <!-- Game buttons -->
+        <div class="game-cards">
+            <div class="game-card" onclick="startGame(game1)">🌊 Tsunami Brainrots</div>
+            <div class="game-card" onclick="startGame(game2)">🔫 Cryzen.io</div>
+            <div class="game-card" onclick="startGame(game3)">🧱 Vectaria.io</div>
+            <div class="game-card" onclick="startGame(game4)">😈 Level Devil</div>
+            <div class="game-card" onclick="startGame(game5)">🔪 Murder</div>
+        </div>
+    </div>
+
+    <!-- Game fullscreen -->
+    <div id="gameContainer">
+        <iframe id="gameFrame" allowfullscreen></iframe>
+    </div>
+
+    <script>
+        const game1 = "https://a99f6b9c-94c4-42a5-a418-02269a08a74a.gdn.poki.com/e395ec98-fd3f-47f2-ae2b-ade206d8ddb3/index.html?hoist=yes";
+        const game2 = "https://2c101259-ee2b-462b-b199-e2ddb71e7bc2.gdn.poki.com/9ed82886-ef28-48ca-a4bd-b86fac609794/index.html?hoist=yes";
+        const game3 = "https://e00d1cab-5c0c-46e5-8f15-e409e1215622.gdn.poki.com/8997dddf-a5c0-408a-85ec-e656ba171e8d/poki-savegame-import.html?hoist=yes";
+        const game4 = "https://13acae8c-ec6a-4823-b1a2-8ea20cea56e7.gdn.poki.com/28edc61e-5dd6-478a-a970-edee95166353/poki-savegame-import.html?hoist=yes";
+        const game5 = "https://5dd25432-015f-11ea-ad56-9cb6d0d995f7.gdn.poki.com/3f291cf7-d4a3-4d5a-bedb-cdfd0f22f867/index.html?hoist=yes";
+
+        function startGame(url) {
+            document.getElementById("homeContent").style.display = "none";
+            document.getElementById("gameContainer").style.display = "block";
+            document.getElementById("gameFrame").src = url;
+        }
+
+        function goHome() {
+            document.getElementById("gameFrame").src = "";
+            document.getElementById("gameContainer").style.display = "none";
+            document.getElementById("homeContent").style.display = "block";
+        }
+    </script>
+
+</body>
+</html>
